@@ -23,3 +23,7 @@ Stretch Goals:
   - (OSRS) Clan Member status/player search
   
  The goal is to have a one-stop shop for supported MMORPGs with viable APIs.
+
+#APIs to be used:
+- https://runescape.wiki/w/Application_programming_interface
+- https://xivapi.com/
