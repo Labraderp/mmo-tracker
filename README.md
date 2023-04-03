@@ -16,6 +16,7 @@ Final Fantasy XIV (FFXIV):
   
 Local:
   - Saved, programmable long-term timers with future sight on when you need to return to your activity
+  - Clean, properly developed UX (because I am w e a k at bootstrap and CSS)
 
 Stretch Goals:
   - Google Calendar integration to enable mobile device alerts
