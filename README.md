@@ -1,5 +1,7 @@
 # mmo-tracker
 
+https://trello.com/b/oUTOjdrx/workflow
+
 Tired of keeping track of farming in one MMO while raiding with the bois on another, or wanting to look up items without bookmarking multiple third-party pages?
 
 The goal of this project is to do just that. Demonstrating with Old School RuneScape and Final Fantasy XIV, the MMO Tracker will keep track of customizable local timers while also enabling search capabilities from within the application without leaving the site. Features planned:
