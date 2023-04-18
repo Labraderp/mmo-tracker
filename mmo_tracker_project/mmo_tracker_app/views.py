@@ -5,11 +5,7 @@ from django.views.decorators.csrf import ensure_csrf_cookie, csrf_exempt
 from django.contrib.auth import authenticate, login, logout
 from rest_framework.decorators import api_view
 from .models import App_User
-<<<<<<< HEAD
 import requests
-=======
-
->>>>>>> main
 import json
 # Create your views here.
 
@@ -56,13 +52,9 @@ def user_log_in(request):
     if user is not None and user.is_active:
         try:
             login(request, user)
-<<<<<<< HEAD
             username = (user.__str__().split('|')[0])
             print(username)
             return JsonResponse({'login':True, 'username':username})
-=======
-            return JsonResponse({'login':True})
->>>>>>> main
         except Exception as e:
             print(e)
             return JsonResponse({'login':False})
@@ -90,7 +82,6 @@ def user_log_out(request):
         return JsonResponse({"logout":False})
 
 @api_view(["GET"])
-<<<<<<< HEAD
 def itemSearchOSRS(request, itemName):
     try:
         print('success')
@@ -102,7 +93,3 @@ def itemSearchOSRS(request, itemName):
         return JsonResponse({"item_search": "failure"})
 
 
-=======
-def userpage(request, name):
-    return JsonResponse({'user page' : name})
->>>>>>> main
