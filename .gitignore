@@ -5,6 +5,10 @@ package.json
 node_modules/
 mmo_tracker_project/.env
 <<<<<<< HEAD
+<<<<<<< HEAD
 mmo_tracker_project/mmo_tracker_project/__pycache__/
 =======
+>>>>>>> main
+=======
+mmo_tracker_project/mmo_tracker_project/__pycache__/
 >>>>>>> main

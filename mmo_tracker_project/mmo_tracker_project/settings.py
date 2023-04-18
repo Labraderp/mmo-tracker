@@ -25,12 +25,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 load_dotenv()
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> main
 try:
     SECRET_KEY = os.environ['secretkey']
 except KeyError as err:
     raise RuntimeError("No SECRET_KEY found. Review README.md and check your .env") from err
+<<<<<<< HEAD
 =======
 SECRET_KEY = os.environ['secretkey']
+>>>>>>> main
+=======
 >>>>>>> main
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -91,9 +97,13 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
 <<<<<<< HEAD
+<<<<<<< HEAD
         'NAME': 'app_user',
 =======
         'NAME': 'app_users_db',
+>>>>>>> main
+=======
+        'NAME': 'app_user',
 >>>>>>> main
     }
 }
@@ -144,7 +154,12 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 AUTH_USER_MODEL = 'mmo_tracker_app.App_User'
 =======
+>>>>>>> main
+=======
+
+AUTH_USER_MODEL = 'mmo_tracker_app.App_User'
 >>>>>>> main
