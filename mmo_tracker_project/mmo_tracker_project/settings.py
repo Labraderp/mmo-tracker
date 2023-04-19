@@ -137,3 +137,5 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'mmo_tracker_app.App_User'
+
+AUTH_USER_MODEL = 'mmo_tracker_app.App_User'

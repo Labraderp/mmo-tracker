@@ -11,5 +11,5 @@ urlpatterns = [
     path('login', views.user_log_in, name='signin'),
     path('curruser', views.curr_user, name='curruser'),
     path('logout', views.user_log_out, name='signout'),
-    path('user/:name', views.userpage, name='userpage')
+    path('itemSearchOSRS/<str:itemName>', views.itemSearchOSRS, name='itemSearch')
 ]
