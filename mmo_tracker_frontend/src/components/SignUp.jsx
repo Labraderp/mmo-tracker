@@ -8,11 +8,7 @@ export default function SignUp() {
     const [password, setPassword] = useState('')
 
     return (
-<<<<<<< HEAD
         <form onSubmit={(e) =>[e.preventDefault(), signUp(username, email, password), setUsername(""), setEmail(""), setPassword("")]}>
-=======
-        <form onSubmit={(e) =>[e.preventDefault(), signUp(username, email, password)]}>
->>>>>>> main
             <h1>Sign Up</h1>
             <input placeholder="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
             <input placeholder="username" value={username} onChange={(e) => setUsername(e.target.value)}/>

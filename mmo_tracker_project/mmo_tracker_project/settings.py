@@ -24,20 +24,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 
 load_dotenv()
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> main
 try:
     SECRET_KEY = os.environ['secretkey']
 except KeyError as err:
     raise RuntimeError("No SECRET_KEY found. Review README.md and check your .env") from err
-<<<<<<< HEAD
-=======
-SECRET_KEY = os.environ['secretkey']
->>>>>>> main
-=======
->>>>>>> main
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -96,15 +86,7 @@ WSGI_APPLICATION = 'mmo_tracker_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-<<<<<<< HEAD
-<<<<<<< HEAD
         'NAME': 'app_user',
-=======
-        'NAME': 'app_users_db',
->>>>>>> main
-=======
-        'NAME': 'app_user',
->>>>>>> main
     }
 }
 
@@ -153,13 +135,7 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-<<<<<<< HEAD
-<<<<<<< HEAD
 
 AUTH_USER_MODEL = 'mmo_tracker_app.App_User'
-=======
->>>>>>> main
-=======
 
 AUTH_USER_MODEL = 'mmo_tracker_app.App_User'
->>>>>>> main
