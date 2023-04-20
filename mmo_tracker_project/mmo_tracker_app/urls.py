@@ -11,5 +11,7 @@ urlpatterns = [
     path('login', views.user_log_in, name='signin'),
     path('curruser', views.curr_user, name='curruser'),
     path('logout', views.user_log_out, name='signout'),
-    path('itemSearchOSRS/<str:itemName>', views.itemSearchOSRS, name='itemSearch')
+    path('itemSearchOSRS/<str:itemName>/<int:pageNum>/<int:maxFlag>', views.itemSearchOSRS, name='itemSearch'),
+    path('bestiarySearchOSRS/<str:beastName>', views.bestiarySearchOSRS, name='beastSearch'),
+    path('bestiaryResolveOSRS/<str:beastID>', views.bestiaryResolveOSRS, name="beastResolve")
 ]

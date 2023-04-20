@@ -9,6 +9,37 @@ import requests
 import json
 # Create your views here.
 
+def getPageCount(itemName):
+    lowPage = 1
+    highPage = 40
+    requestLimit = 8
+    requestCount = 0
+
+    response = requests.get(f"https://secure.runescape.com/m=itemdb_oldschool/api/catalogue/items.json?category=1&alpha={itemName}&page=1")
+    holder = response.json()
+
+    if len(holder['items']) < 12:
+        return 1
+
+    while(not lowPage == highPage and requestCount <= requestLimit):
+        currPage = (lowPage + highPage) // 2
+        response = requests.get(f"https://secure.runescape.com/m=itemdb_oldschool/api/catalogue/items.json?category=1&alpha={itemName}&page={currPage}")
+        holder = response.json()
+
+        requestLength = len(holder['items'])
+        requestCount += 1
+        
+        if (requestLength < 12 and requestLength > 0):
+            return currPage
+
+        if requestLength == 12:
+            lowPage = currPage
+
+        if requestLength == 0:
+            highPage = currPage
+
+    return currPage        
+
 def csrf(request):
     return JsonResponse({'csrfToken': get_token(request)})
 
@@ -82,14 +113,42 @@ def user_log_out(request):
         return JsonResponse({"logout":False})
 
 @api_view(["GET"])
-def itemSearchOSRS(request, itemName):
+def itemSearchOSRS(request, itemName, pageNum, maxFlag):
+    if maxFlag == 0:
+        try:
+            print('success - changes to field, getting max pages!')
+            response=requests.get(f"https://secure.runescape.com/m=itemdb_oldschool/api/catalogue/items.json?category=1&alpha={itemName}&page={pageNum}")
+            maxPages = getPageCount(itemName)
+            return JsonResponse({"item_search": response.json(), "max_pages": maxPages})
+        except Exception as e:
+            print(e)
+            return JsonResponse({"item_search": "failure"})
+    else:
+        try:
+            print(f"success - max page already received - on page {pageNum}")
+            response=requests.get(f"https://secure.runescape.com/m=itemdb_oldschool/api/catalogue/items.json?category=1&alpha={itemName}&page={pageNum}")
+            return JsonResponse({"item_search" : response.json()})
+        except Exception as e:
+            print(e)
+            return JsonResponse({"item_search": "failure"})
+
+@api_view(["GET"])
+def bestiarySearchOSRS(request, beastName):
     try:
-        print('success')
-        response=requests.get(f"https://secure.runescape.com/m=itemdb_oldschool/api/catalogue/items.json?category=1&alpha={itemName}&page=1")
-        print(response.json())
-        return JsonResponse({"item_search": response.json()})
+        print(f"reached backend with value: {beastName}")
+        response = requests.get(f"https://secure.runescape.com/m=itemdb_rs/bestiary/beastSearch.json?term={beastName}")
+        return JsonResponse({"beast_search": response.json()})
     except Exception as e:
         print(e)
-        return JsonResponse({"item_search": "failure"})
+        return JsonResponse({"beast_search": "failure"})
 
-
+@api_view(["GET"])
+def bestiaryResolveOSRS(request, beastID):
+    try:
+        beastID = int(beastID)
+        print(f"resolving beast - {beastID}")
+        response = requests.get(f"https://secure.runescape.com/m=itemdb_rs/bestiary/beastData.json?beastid={beastID}")
+        return JsonResponse({"beast_resolve":response.json()})
+    except Exception as e:
+        print(e)
+        return JsonResponse({"beast_resolve":"failure"})
