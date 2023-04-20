@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from "react";
 import { bestiaryResolve } from "../utilities";
-import BestiaryDetails from "./BestiaryDetails";
 
 export default function BestiaryData({beast}) {
 

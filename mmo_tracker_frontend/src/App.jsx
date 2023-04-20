@@ -25,7 +25,7 @@ const [changeState, setChangeState] = useState(false);
       <userContext.Provider value={{user, setUser}}>
         <div>
           <nav className='navbar navbar-expand-lg navbar-light bg-light'>
-            <h1 className='navbar-brand'>MMO Buddy: Your companion for all things MMO</h1>
+            <h1 className='navbar-brand'>RSBuddy</h1>
             {(user == null) ? 
               <div /> : 
               <button onClick={() => {[logOut(setUser), setChangeState(true)]}}>Log Out</button>
@@ -33,11 +33,18 @@ const [changeState, setChangeState] = useState(false);
           </nav>
         </div>
         <div>
-          { (user == null) ? 
-            <div>
+          { (user == null) ?
+          <div className="container-fluid">
+            <div className="row align-items-center" id="sULIBackground">
+              <div className="col align-self-center">
               <SignUp />
+              </div>
+              <div className="col align-self-center">
               <LogIn />
-            </div> : 
+              </div>
+            </div>
+            </div>
+             : 
             <div>
               <HomePage />
             </div>

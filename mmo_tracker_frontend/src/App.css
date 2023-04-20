@@ -5,6 +5,16 @@
   text-align: center;
 }
 
+body {
+  background-image: url("https://rare-gallery.com/uploads/posts/1039888-video-games-fantasy-art-knight-battle-artwork-flag-armor-warrior-Lithuania-Runescape-mythology-screenshot-computer-wallpaper-fictional-character.jpg");
+}
+
+#sULIBackground {
+  background-color: rgba(180, 167, 164, 0.75)
+  
+}
+
+/* 
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -39,4 +49,4 @@
 
 .read-the-docs {
   color: #888;
-}
+} */
