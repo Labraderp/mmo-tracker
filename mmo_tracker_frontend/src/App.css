@@ -11,7 +11,13 @@ body {
 
 #sULIBackground {
   background-color: rgba(180, 167, 164, 0.75)
-  
+}
+
+h3 {
+  color: wheat;
+}
+p {
+  color: wheat;
 }
 
 /* 

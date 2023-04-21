@@ -3,6 +3,7 @@ import { userContext } from "../App";
 import ItemLookup from "../components/ItemLookup";
 import ItemSearchRedirect from "./ItemSearchRedirect";
 import BestiarySearch from "../components/BestiarySearch";
+import Timers from "./Timers";
 
 
 
@@ -25,6 +26,7 @@ export default function HomePage() {
                 <BestiarySearch />
 
             }
+            <Timers />
         </div>
     );
 }
