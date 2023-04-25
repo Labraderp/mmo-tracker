@@ -5,3 +5,7 @@ from . import models
 @admin.register(models.App_User)
 class App_UserAdmin(admin.ModelAdmin):
     list_display = ("username", "password")
+
+@admin.register(models.Fav_Beast)
+class Fav_BeastAdmin(admin.ModelAdmin):
+    list_display = ("name", "user")

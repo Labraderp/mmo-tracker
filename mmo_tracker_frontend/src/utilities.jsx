@@ -64,3 +64,11 @@ export const bestiaryResolve = async(beastID) => {
     // console.log(response.data)
     return response.data.beast_resolve
 }
+
+export const saveBeast = async(beast, userData) => {
+    let response = await axios.post('/favBeast', {
+        "beast" : beast,
+        "user" : userData
+    })
+    console.log(response)
+}

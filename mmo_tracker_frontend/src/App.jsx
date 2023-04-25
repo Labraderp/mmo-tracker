@@ -9,12 +9,15 @@ export const userContext = createContext(null)
 
 export default function App() {
 const [user, setUser] = useState(null);
+const [userData, setUserData] = useState(null)
 const [changeState, setChangeState] = useState(false);
 
   useEffect(() => {
     const getCurrUser = async () => {
       setUser((await currUser()).username)
+      setUserData(await currUser())
       console.log(user)
+      console.log(userData)
     };
 
     getCurrUser();
@@ -22,7 +25,7 @@ const [changeState, setChangeState] = useState(false);
 
     return (
       <>
-      <userContext.Provider value={{user, setUser}}>
+      <userContext.Provider value={{user, setUser, userData}}>
         <div>
           <nav className='navbar navbar-expand-lg navbar-light bg-light'>
             <h1 className='navbar-brand'>RSBuddy</h1>

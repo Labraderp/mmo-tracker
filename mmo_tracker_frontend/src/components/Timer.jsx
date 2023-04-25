@@ -29,7 +29,7 @@ export default function Timer() {
     }
 
     const clearTimer = (e) => {
-        setTimer('00:00:10');
+        setTimer('00:00:20');
 
         if (Ref.current) clearInterval(Ref.current);
         const id = setInterval(() => {
@@ -41,7 +41,7 @@ export default function Timer() {
     const getDeadTime = () => {
         let deadline = new Date();
 
-        deadline.setSeconds(deadline.getSeconds() + 10);
+        deadline.setSeconds(deadline.getSeconds() + 20);
         return deadline;
     }
 

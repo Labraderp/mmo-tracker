@@ -1,7 +1,10 @@
 import { useContext, useEffect, useState } from "react";
-import { bestiaryResolve } from "../utilities";
+import { bestiaryResolve, saveBeast } from "../utilities";
+import { userContext } from "../App";
 
 export default function BestiaryData({beast}) {
+
+    const { userData } = useContext(userContext)
 
     const [beastID, setBeastID] = useState(beast.value)
     const [beastName, setBeastName] = useState("")
@@ -29,6 +32,9 @@ export default function BestiaryData({beast}) {
 
     return (
         <div>
+            <form onSubmit={(e) => [e.preventDefault(), saveBeast(beast, userData)]}>
+                <button type="submit">Add to Favorites</button>
+            </form>
             <h3 onClick={(e) => [e.preventDefault(), setToggleClicked(!toggleClicked)]}>{beast.label}</h3>
             {(toggleClicked == true) ?
                 <div>

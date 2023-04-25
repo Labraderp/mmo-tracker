@@ -4,7 +4,7 @@ from django.middleware.csrf import get_token
 from django.views.decorators.csrf import ensure_csrf_cookie, csrf_exempt
 from django.contrib.auth import authenticate, login, logout
 from rest_framework.decorators import api_view
-from .models import App_User
+from .models import App_User, Fav_Item, Fav_Beast
 import requests
 import json
 # Create your views here.
@@ -152,3 +152,25 @@ def bestiaryResolveOSRS(request, beastID):
     except Exception as e:
         print(e)
         return JsonResponse({"beast_resolve":"failure"})
+    
+@api_view(["POST"])
+def favBeast(request):
+    beast_name = request.data['beast']['label']
+    beast_id = request.data['beast']['value']
+    email = request.data['user']['email']
+    username = request.data['user']['username']
+    user = App_User.objects.get(email=email, username=username)
+    
+    try:
+        beast = Fav_Beast.objects.filter(name=beast_name, beast_id=beast_id)
+        if beast.exists():
+            print(f"{beast_name} is already in favorites for {username}")
+            return JsonResponse({"fav request" : "already added"})
+        else:
+            new_beast = Fav_Beast.objects.create(name=beast_name, beast_id=beast_id, user=user)
+            new_beast.save()
+            print(f"{username} has saved {beast_name}")
+            return JsonResponse({"fav request" : "success"})
+    except Exception as e:
+        print(e)
+        return JsonResponse({"fav request" : "failed"})
