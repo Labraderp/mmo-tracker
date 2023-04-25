@@ -72,3 +72,27 @@ export const saveBeast = async(beast, userData) => {
     })
     console.log(response)
 }
+
+export const getFaveBeasts = async(userData, setBeasts) => {
+    let response = await axios.post('/getFaveBeasts', {
+        "user" : userData
+    })
+    console.log(response.data.beast_list)
+    return setBeasts(response.data.beast_list)
+}
+
+export const saveItem = async(item, userData) => {
+    let response = await axios.post('/favItem', {
+        "user" : userData,
+        "item" : item
+    })
+    console.log(response.data)
+}
+
+export const getFaveItems = async(userData, setItems) => {
+    let response = await axios.post('/getFaveItems', {
+        "user" : userData
+    })
+    console.log(response.data.item_list)
+    return setItems(response.data.item_list)
+}

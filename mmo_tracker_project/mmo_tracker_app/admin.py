@@ -9,3 +9,7 @@ class App_UserAdmin(admin.ModelAdmin):
 @admin.register(models.Fav_Beast)
 class Fav_BeastAdmin(admin.ModelAdmin):
     list_display = ("name", "user")
+
+@admin.register(models.Fav_Item)
+class Fav_ItemAdmin(admin.ModelAdmin):
+    list_display = ("name", "user")

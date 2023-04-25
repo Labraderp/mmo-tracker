@@ -14,5 +14,8 @@ urlpatterns = [
     path('itemSearchOSRS/<str:itemName>/<int:pageNum>/<int:maxFlag>', views.itemSearchOSRS, name='itemSearch'),
     path('bestiarySearchOSRS/<str:beastName>', views.bestiarySearchOSRS, name='beastSearch'),
     path('bestiaryResolveOSRS/<str:beastID>', views.bestiaryResolveOSRS, name="beastResolve"),
-    path('favBeast', views.favBeast, name='favBeast')
+    path('favBeast', views.favBeast, name='favBeast'),
+    path('getFaveBeasts', views.getFaveBeasts, name='getFaveBeasts'),
+    path('favItem', views.favItem, name='favItem'),
+    path('getFaveItems', views.getFaveItems, name='getFaveItems')
 ]

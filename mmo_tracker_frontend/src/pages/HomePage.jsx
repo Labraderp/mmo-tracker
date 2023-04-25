@@ -4,6 +4,7 @@ import ItemLookup from "../components/ItemLookup";
 import ItemSearchRedirect from "./ItemSearchRedirect";
 import BestiarySearch from "../components/BestiarySearch";
 import Timers from "./Timers";
+import Faves from "./Faves";
 
 
 
@@ -38,7 +39,7 @@ export default function HomePage() {
             }
             {(features == 3) ? <Timers /> : <div />
             }
-            {(features == 4) ? <Timers /> : <div />
+            {(features == 4) ? <Faves /> : <div />
             }
         </div>
         </>

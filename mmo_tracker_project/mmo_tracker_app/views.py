@@ -174,3 +174,68 @@ def favBeast(request):
     except Exception as e:
         print(e)
         return JsonResponse({"fav request" : "failed"})
+    
+@api_view(["POST"])
+def getFaveBeasts(request):
+    data = []
+    email = request.data['user']['email']
+    username = request.data['user']['username']
+    user = App_User.objects.get(email=email, username=username)
+    beastList = list(Fav_Beast.objects.filter(user=user))
+    
+    for beast in beastList:
+        data.append({
+            "label" : beast.name,
+            "value" : beast.beast_id
+        })
+    
+    print(data)
+    return JsonResponse({"beast_list": data})
+
+@api_view(["POST"])
+def favItem(request):
+    email = request.data['user']['email']
+    username = request.data['user']['username']
+    user = App_User.objects.get(email=email, username=username)
+    item = request.data['item']
+    print(item)
+
+    try:
+        new_item = Fav_Item.objects.filter(name=item['name'])
+        if new_item.exists():
+            print(f"{item['name']} is already a favorite")
+            return JsonResponse({"fave_item" : "already_added"})
+        else:
+            new_item = Fav_Item.objects.create(name=item['name'], description=item['description'],
+            icon=item['icon'], trend=item['today']['trend'], price=item['current']['price'], trendprice=item['today']['price'], user=user)
+            new_item.save()
+            print(f"{item['name']}has been saved to {user}")
+            return JsonResponse({"fave_item" : "item added"})
+    except Exception as e:
+        print(e)
+        return JsonResponse({"fave_item" : "failure"})
+
+@api_view(["POST"])
+def getFaveItems(request):
+    data = []
+    email = request.data['user']['email']
+    username = request.data['user']['username']
+    user = App_User.objects.get(email=email, username=username)
+    itemList = list(Fav_Item.objects.filter(user=user))
+    
+    for item in itemList:
+        data.append({
+            "name" : item.name,
+            "description" : item.description,
+            "icon" : item.icon,
+            "today" : {
+                "trend" : item.trend,
+                "price" : item.trendprice
+            },
+            "current" : {
+                "price" : item.price
+            },
+        })
+    
+    print(data)
+    return JsonResponse({"item_list": data})

@@ -1,6 +1,10 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { saveItem } from "../utilities";
+import { userContext } from "../App";
+
 
 export default function Item({item}) {
+    const { userData } = useContext(userContext)
     const [showDetails, toggleShowDetails] = useState(false)
 
     useEffect(() => {
@@ -13,6 +17,9 @@ export default function Item({item}) {
 
     return(
         <>
+        <form onSubmit={(e) => [e.preventDefault(), saveItem(item, userData)]}>
+            <button type="submit">Add to Favorites</button>
+        </form>
         <div className="row" onClick={toggleDetails}>
             <div className="col"><img src={item.icon}/></div>
             <div className="col"><p className="itemName">{item.name}</p></div>

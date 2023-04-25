@@ -14,7 +14,11 @@ class App_User(AbstractUser):
     
 class Fav_Item(models.Model):
     name = models.CharField(max_length=100, null=False, blank=False)
-    description = models.CharField(max_length=255, null=False, blank=True)
+    description = models.CharField(max_length=255, null=False, blank=False)
+    icon = models.CharField(max_length=255, null=False, blank=False)
+    trend = models.CharField(max_length=100, null=False, blank=False)
+    price = models.CharField(max_length=50, null=False, blank=False)
+    trendprice = models.CharField(max_length=50, null=False, blank=False)
     user = models.ForeignKey(App_User, on_delete=models.CASCADE)
 
     def __str__(self):
