@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import { userContext } from "../App";
 import { getFaveBeasts, getFaveItems } from "../utilities";
 import BestiaryData from "../components/BestiaryData";
@@ -15,10 +15,11 @@ export default function Faves() {
             await getFaveBeasts(userData, setBeasts)
             await getFaveItems(userData, setItems)
         }
-
         getFaves()
     }, [])
-    
+
+
+
     return (
         <div>
             <h1>Faves</h1>

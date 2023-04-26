@@ -4,7 +4,7 @@ from django.middleware.csrf import get_token
 from django.views.decorators.csrf import ensure_csrf_cookie, csrf_exempt
 from django.contrib.auth import authenticate, login, logout
 from rest_framework.decorators import api_view
-from .models import App_User, Fav_Item, Fav_Beast
+from .models import App_User, Fav_Item, Fav_Beast, Timer
 import requests
 import json
 # Create your views here.
@@ -198,18 +198,17 @@ def favItem(request):
     username = request.data['user']['username']
     user = App_User.objects.get(email=email, username=username)
     item = request.data['item']
-    print(item)
 
     try:
         new_item = Fav_Item.objects.filter(name=item['name'])
         if new_item.exists():
-            print(f"{item['name']} is already a favorite")
-            return JsonResponse({"fave_item" : "already_added"})
+            new_item.delete()
+            return JsonResponse({"fave_item" : "removed"})
         else:
             new_item = Fav_Item.objects.create(name=item['name'], description=item['description'],
             icon=item['icon'], trend=item['today']['trend'], price=item['current']['price'], trendprice=item['today']['price'], user=user)
             new_item.save()
-            print(f"{item['name']}has been saved to {user}")
+            print(f"{item['name']} has been saved to {user}")
             return JsonResponse({"fave_item" : "item added"})
     except Exception as e:
         print(e)
@@ -239,3 +238,47 @@ def getFaveItems(request):
     
     print(data)
     return JsonResponse({"item_list": data})
+
+@api_view(["POST"])
+def getTimers(request):
+    data = []
+
+    try:
+        user = App_User.objects.get(email=request.data['user']['email'], username=request.data['user']['username'])
+        timerList = list(Timer.objects.filter(user=user))
+        
+        for timer in timerList:
+            data.append({
+                "name" : timer.name,
+                "hours" : timer.hours,
+                "mins" : timer.mins,
+                "sec" : timer.sec
+            })
+        print(data)
+        return JsonResponse({"timer_list" : data})
+    except Exception as e:
+        print(e)
+        return JsonResponse({"timer_list" : "failure"})
+
+@api_view(["POST"])
+def saveTimer(request):
+    print(request.data)
+    
+    try:
+        user = App_User.objects.get(email=request.data['user']['email'], username=request.data['user']['username'])
+        
+        if(Timer.objects.filter(name=request.data['timer']['name'], user=user)):
+            return JsonResponse({'saveTimer': 'alreadyExists'})
+        
+        new_timer = Timer.objects.create(
+            name = request.data['timer']['name'],
+            hours = request.data['timer']['hours'],
+            mins = request.data['timer']['mins'],
+            sec = request.data['timer']['sec'],
+            user = user
+        )
+        new_timer.save()
+        return JsonResponse({'saveTimer' : 'success'})
+    except Exception as e:
+        print(e)
+        return JsonResponse({'saveTimer' : 'failed'})

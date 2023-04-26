@@ -86,7 +86,7 @@ export const saveItem = async(item, userData) => {
         "user" : userData,
         "item" : item
     })
-    console.log(response.data)
+    console.log(response.data['fave_item'])
 }
 
 export const getFaveItems = async(userData, setItems) => {
@@ -94,5 +94,20 @@ export const getFaveItems = async(userData, setItems) => {
         "user" : userData
     })
     console.log(response.data.item_list)
-    return setItems(response.data.item_list)
+    setItems(response.data.item_list)
+}
+
+export const getTimers = async(userData, setTimerList) => {
+    let response = await axios.post('/getTimers', {
+        "user" : userData
+    })
+    setTimerList(response.data.timer_list)
+}
+
+export const saveTimer = async(userData, timer) => {
+    let response = await axios.post('/saveTimer', {
+        "user" : userData,
+        "timer" : timer
+    })
+    console.log(response.data)
 }

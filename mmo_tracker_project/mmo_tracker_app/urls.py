@@ -17,5 +17,7 @@ urlpatterns = [
     path('favBeast', views.favBeast, name='favBeast'),
     path('getFaveBeasts', views.getFaveBeasts, name='getFaveBeasts'),
     path('favItem', views.favItem, name='favItem'),
-    path('getFaveItems', views.getFaveItems, name='getFaveItems')
+    path('getFaveItems', views.getFaveItems, name='getFaveItems'),
+    path('getTimers', views.getTimers, name='getTimers'),
+    path('saveTimer', views.saveTimer, name='saveTimer')
 ]

@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from "react";
 import { saveItem } from "../utilities";
 import { userContext } from "../App";
 
-
 export default function Item({item}) {
     const { userData } = useContext(userContext)
     const [showDetails, toggleShowDetails] = useState(false)

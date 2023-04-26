@@ -11,12 +11,6 @@ export default function BestiaryData({beast}) {
     const [beastDesc, setBeastDesc] = useState("")
     const [toggleClicked, setToggleClicked] = useState(false)
 
-    // const getBeastData = async () => {
-    //     const data = await bestiaryResolve(beastID)
-    //     setBeastName(data.name)
-    //     setBeastData(data)
-    // }
-
     useEffect(() => {
         if(toggleClicked) {
             const getBeastData = async () => {
@@ -33,7 +27,7 @@ export default function BestiaryData({beast}) {
     return (
         <div>
             <form onSubmit={(e) => [e.preventDefault(), saveBeast(beast, userData)]}>
-                <button type="submit">Add to Favorites</button>
+                <button type="submit">Add/Remove Fave</button>
             </form>
             <h3 onClick={(e) => [e.preventDefault(), setToggleClicked(!toggleClicked)]}>{beast.label}</h3>
             {(toggleClicked == true) ?

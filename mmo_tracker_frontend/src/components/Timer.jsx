@@ -1,6 +1,6 @@
 import {useState, useRef, useEffect} from 'react'
 
-export default function Timer() {
+export default function Timer({name, hours, mins, sec}) {
 
     const Ref = useRef(null);
     const [timer, setTimer] = useState('00:00:00');
@@ -29,7 +29,11 @@ export default function Timer() {
     }
 
     const clearTimer = (e) => {
-        setTimer('00:00:20');
+        setTimer (
+            (hours > 9 ? hours : '0' + hours) + ':' +
+            (mins > 9 ? mins : '0' + mins) + ':' +
+            (sec > 9 ? sec : '0' + sec)
+        )
 
         if (Ref.current) clearInterval(Ref.current);
         const id = setInterval(() => {
@@ -41,7 +45,9 @@ export default function Timer() {
     const getDeadTime = () => {
         let deadline = new Date();
 
-        deadline.setSeconds(deadline.getSeconds() + 20);
+        deadline.setSeconds(deadline.getSeconds() + sec);
+        deadline.setHours(deadline.getHours() + hours);
+        deadline.setMinutes(deadline.getMinutes() + mins)
         return deadline;
     }
 
@@ -55,6 +61,7 @@ export default function Timer() {
 
     return (
         <div>
+            <h1>{name}</h1>
             <h2>{timer}</h2>
             <button onClick={onClickReset}>Reset</button>
         </div>

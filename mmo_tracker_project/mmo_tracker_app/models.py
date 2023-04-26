@@ -19,6 +19,7 @@ class Fav_Item(models.Model):
     trend = models.CharField(max_length=100, null=False, blank=False)
     price = models.CharField(max_length=50, null=False, blank=False)
     trendprice = models.CharField(max_length=50, null=False, blank=False)
+
     user = models.ForeignKey(App_User, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -32,3 +33,13 @@ class Fav_Beast(models.Model):
     def __str__(self):
         return f"{self.name} : {self.beast_id}"
 
+class Timer(models.Model):
+    name = models.CharField(max_length=100, null=False, blank=False)
+    hours = models.IntegerField(null=False, blank=False, default=00)
+    mins = models.IntegerField(null=False, blank=False, default=00)
+    sec = models.IntegerField(null=False, blank=False, default=00)
+
+    user = models.ForeignKey(App_User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.name} | {self.user}"
