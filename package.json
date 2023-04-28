@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "http://labraderp.dog",
+  "homepage": "https://labraderp.github.io/mmo-tracker",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
