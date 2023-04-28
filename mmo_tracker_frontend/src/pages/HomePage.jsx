@@ -5,6 +5,11 @@ import ItemSearchRedirect from "./ItemSearchRedirect";
 import BestiarySearch from "../components/BestiarySearch";
 import Timers from "./Timers";
 import Faves from "./Faves";
+import gelogo from "../assets/gelogo.png"
+import jad from "../assets/jad.png"
+import astral from "../assets/astral.png"
+import watch from "../assets/watch.png"
+
 
 
 
@@ -17,31 +22,55 @@ export default function HomePage() {
 
     return (
         <>
-        <h1>You are now logged in, {user}</h1>
-        <div>
-        <img id="navIcon" src="https://pbs.twimg.com/profile_images/949787136030539782/LnRrYf6e_400x400.jpg"
-                onClick={(e) => [e.preventDefault(), toggleFeatures(1)]}></img>
+        <div id="liveAlertPlaceholder" />
+        <h1 id="general-bg">Welcome to your home page, {user}</h1>
+        <div className="d-flex">
+            
+            <div className="col-2 bg-light-grey text-center">
+                <div className="row">
+                    <a class="d-inline-flex" href="#">
+                    <img id="navIcon" src={gelogo}
+                        onClick={(e) => [e.preventDefault(), toggleFeatures(1)]} />
+                    </a>
 
-        <img id="navIcon" src="https://pbs.twimg.com/profile_images/1551544340195024902/cHOOs7HW_400x400.jpg"
-                onClick={(e) => [e.preventDefault(), toggleFeatures(2)]}></img>
+                </div>
+                
+                <div className="row">
+                    <a class="d-inline-flex" href="#">
+                    <img id="navIcon" src={jad}
+                        onClick={(e) => [e.preventDefault(), toggleFeatures(2)]} />
+                    </a>
+                </div>
+                
+                <div className="row">
+                    <a class="d-inline-flex" href="#">
+                    <img id="navIcon" src={watch}
+                        onClick={(e) => [e.preventDefault(), toggleFeatures(3)]} />
+                    </a>
 
-        <img id="navIcon" src="https://pbs.twimg.com/profile_images/1363102745528565761/4Ox26Ynw_400x400.png"
-                onClick={(e) => [e.preventDefault(), toggleFeatures(3)]}></img>
+                </div>
+                
+                <div className="row">
+                    <a class="d-inline-flex" href="#">
+                    <img id="navIcon" src={astral}
+                        onClick={(e) => [e.preventDefault(), toggleFeatures(4)]} />
+                    </a>
 
-        <img id="navIcon" src="https://pbs.twimg.com/profile_images/1046968391389589507/_0r5bQLl_400x400.jpg"
-                onClick={(e) => [e.preventDefault(), toggleFeatures(4)]}></img>
-
+                </div>
+            </div>
+            <div className="col">
+                {(features == 1) ? <div id="general-bg"><ItemSearchRedirect /></div> : <div />
+                }
+                {(features == 2) ? <div id="general-bg"><BestiarySearch /></div> : <div />
+                }
+                {(features == 3) ? <div id="general-bg"><Timers /></div> : <div />
+                }
+                {(features == 4) ? <div id="general-bg"><Faves /></div> : <div />
+                }
+            </div>
+        
         </div>
-        <div>
-            {(features == 1) ? <ItemSearchRedirect /> : <div />
-            }
-            {(features == 2) ? <BestiarySearch /> : <div />
-            }
-            {(features == 3) ? <Timers /> : <div />
-            }
-            {(features == 4) ? <Faves /> : <div />
-            }
-        </div>
+
         </>
     );
 }

@@ -1,6 +1,11 @@
-import {useState, useRef, useEffect} from 'react'
+import {useState, useRef, useEffect, useContext} from 'react'
+import { userContext } from '../App';
+import { deleteTimer } from '../utilities';
+
 
 export default function Timer({name, hours, mins, sec}) {
+
+    const { userData } = useContext(userContext)
 
     const Ref = useRef(null);
     const [timer, setTimer] = useState('00:00:00');
@@ -63,7 +68,8 @@ export default function Timer({name, hours, mins, sec}) {
         <div>
             <h1>{name}</h1>
             <h2>{timer}</h2>
-            <button onClick={onClickReset}>Reset</button>
+            <button className="btn btn-primary" onClick={onClickReset}>Reset</button>
+            <button className="btn btn-danger" onClick={(e) => [e.preventDefault(), deleteTimer(userData, name)]}>Delete</button>
         </div>
     );
 }

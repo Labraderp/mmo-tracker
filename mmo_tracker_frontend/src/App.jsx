@@ -1,9 +1,10 @@
 import { useState, useEffect, createContext } from 'react'
 import './App.css'
-import { currUser, logOut } from './utilities';
-import SignUp from './components/SignUp';
-import LogIn from './components/LogIn';
-import HomePage from './pages/HomePage';
+import { currUser, logOut, logIn, signUp } from './utilities'
+import SignUp from './components/SignUp'
+import LogIn from './components/LogIn'
+import HomePage from './pages/HomePage'
+import RSBuddy from './assets/rsbuddy.png'
 
 export const userContext = createContext(null)
 
@@ -25,20 +26,20 @@ const [changeState, setChangeState] = useState(false);
 
     return (
       <>
+      <div className="position-fixed bottom-0 end-0 p-3" id="liveAlertPlaceholder" />
       <userContext.Provider value={{user, setUser, userData}}>
-        <div>
-          <nav className='navbar navbar-expand-lg navbar-light bg-light'>
-            <h1 className='navbar-brand'>RSBuddy</h1>
+        <div className='d-flex justify-content-between'>
+            <img className='navbar-brand' src={RSBuddy} id="rsbuddyNav" />
+
             {(user == null) ? 
               <div /> : 
-              <button onClick={() => {[logOut(setUser), setChangeState(true)]}}>Log Out</button>
+              <button className="btn btn-danger m-4" onClick={() => {[logOut(setUser), setChangeState(true)]}}>Log Out</button>
             }
-          </nav>
         </div>
         <div>
           { (user == null) ?
           <div className="container-fluid">
-            <div className="row align-items-center" id="sULIBackground">
+            <div className="row align-items-center rounded p-2" id="general-bg">
               <div className="col align-self-center">
               <SignUp />
               </div>

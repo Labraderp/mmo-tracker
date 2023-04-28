@@ -13,11 +13,13 @@ export default function BestiarySearch() {
 
     return(
         <div>
-            <h1>Hello, BestiarySearch!</h1>
+            <h2>Search for a beast!</h2>
+            <div className="container text-center">
             <form onSubmit={(e) => [e.preventDefault(), bestiarySearchOSRS(beastName, setBeastList)]}>
-                <input placeholder="Monster Name" onChange={(e) => {setBeastName(e.target.value)}} />
-                <button type="submit">Search!</button>
+                <input className="form-floating p-2" placeholder="Monster Name" onChange={(e) => {setBeastName(e.target.value)}} />
+                <button className="btn btn-primary p-2"type="submit">Search!</button>
             </form>
+            </div>
             {(beastList == []) ?
                 <div /> :
                 beastList.map((beast) => <BestiaryData beast={beast} />)

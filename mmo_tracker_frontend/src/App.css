@@ -1,62 +1,80 @@
 #root {
-  max-width: 1280px;
+  max-width: 2560px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  --main-text-color: wheat;
+  --main-bg-color: rgba(35, 35, 35, 70%);
+  --pos-bg-color: rgba(37, 128, 61, 70%);
+  --neg-bg-color: rgba(125, 54, 54, 70%);
+  --neu-bg-color: rgba(77, 77, 77, 70%);
+
 }
 
 #navIcon {
-  width: 100px;
+  width: 75px;
 }
 
 body {
-  background-image: url("https://rare-gallery.com/uploads/posts/1039888-video-games-fantasy-art-knight-battle-artwork-flag-armor-warrior-Lithuania-Runescape-mythology-screenshot-computer-wallpaper-fictional-character.jpg");
+  background-image: url("./assets/rsbg.jpg");
+  background-size: 100%;
 }
 
-#sULIBackground {
-  background-color: rgba(180, 167, 164, 0.75)
+#general-bg {
+  background-color: var(--main-bg-color);
+  color: var(--main-text-color);
 }
 
+#floatingEmail {
+  background-color: var(--main-bg-color);
+}
+
+#floatingUser {
+  background-color: var(--main-bg-color);
+
+}
+
+#floatingPass {
+  background-color: var(--main-bg-color);
+
+}
+
+#card-text {
+  font-size: 1rem;
+  color: var(--main-text-color)
+}
+
+#item-icon {
+  width: 100px
+}
+
+#positive {
+  background-color: var(--pos-bg-color);
+}
+
+#negative {
+  background-color: var(--neg-bg-color);
+}
+
+#neutral {
+  background-color: var(--neu-bg-color);
+}
+
+h1 {
+  color: var(--main-text-color)
+
+}
+
+h2 {
+  color: var(--main-text-color)
+}
 h3 {
-  color: wheat;
+  color: var(--main-text-color)
 }
 p {
-  color: wheat;
+  color: var(--main-text-color)
 }
 
-/* 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+#rsbuddyicon {
+  width: 100px
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-} */

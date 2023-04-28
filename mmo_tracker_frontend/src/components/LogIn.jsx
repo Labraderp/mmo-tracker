@@ -13,22 +13,24 @@ export default function LogIn() {
     }, [email, password])
     
     return(
+        <>
+        <h3>Log In</h3>
+        <p id="logInText">Existing users can log in below!</p>
         <div className="col">
             <form onSubmit={(e) => [e.preventDefault(), logIn(email, password, setUser), setEmail(""), setPassword("")]} >
-                <h3>Log In</h3>
-                <p id="logInText">Existing users can log in below!</p>
-                <div className="form-floating">
+                <div className="form-floating p-2">
                     <input type="email"    className="form-control" id="floatingEmail" value={email} onChange={(e) => setEmail(e.target.value)}/>
-                    <label for="floatingEmail">Email</label>
+                    <label for="floatingEmail">Email Address</label>
                 </div>
 
-                <div className="form-floating">
+                <div className="form-floating p-2">
                     <input type='password' className="form-control" id="floatingPass" value={password} onChange={(e) => setPassword(e.target.value)}/>
                     <label for="floatingPass">Password</label>
                 </div>
 
-                <button className="btn btn-outline-primary" type="submit">Log In</button>
+                <button className="btn btn-primary p-2" type="submit">Log In</button>
             </form>
         </div>
+        </>
     )
 }

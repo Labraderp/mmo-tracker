@@ -25,11 +25,21 @@ export default function Faves() {
             <h1>Faves</h1>
             {(beasts == []) ?
                 <div /> :
-                beasts.map((beast) => <BestiaryData beast={beast}/>)
+                <div className="container text-center">
+                    <h1>Favorited Beasts</h1>
+                    <div className="row row-cols-auto">
+                        {beasts.map((beast) => <BestiaryData beast={beast}/>)}
+                    </div>
+                    </div>
             }
             {(items == []) ?
                 <div /> :
-                items.map((item) => <Item item={item}/>)
+                <div className="container text-center">
+                    <h1>Favorited Items</h1>
+                    <div className="row row-cols-auto">
+                {items.map((item) => <Item item={item}/>)}
+                    </div>
+                </div>
             }
         </div>
     )

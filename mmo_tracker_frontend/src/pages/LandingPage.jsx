@@ -15,6 +15,7 @@ export default function LandingPage() {
     return (
         <>
         <div>
+
         <form onSubmit={(e) =>[e.preventDefault(), signUp(username, email, password)]}>
             <h1>Sign Up</h1>
             <input placeholder="email" value={email} onChange={(e) => setEmail(e.target.value)}/>

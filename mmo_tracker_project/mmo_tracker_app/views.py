@@ -67,18 +67,28 @@ def user_sign_up(request):
     if 'staff' in request.data:
         staff = request.data['staff']
 
+    if email == '' or password == '' or username == '':
+        return JsonResponse({"signup" : False, "reason" : "empty_field"})
+
     try:
         new_user = App_User.objects.create_user(username = username, email = email, password = password)
         new_user.save()
-        return JsonResponse({"success" : True})
+        return JsonResponse({"signup" : True})
     except Exception as e:
         print(e)
-        return JsonResponse({"success" : False})
+        return JsonResponse({"signup" : False, 'reason' : 'already_signed_up'})
     
 @api_view(["POST"])
 def user_log_in(request):
     email = request.data['email']
     password = request.data['password']
+    
+    if email == '':
+        return JsonResponse({'login' : False, 'reason' : 'no_email'})
+    
+    if password == '':
+        return JsonResponse({'login' : False, 'reason' : 'no_password'})
+    
     user = authenticate(request, username=email, password=password)
     if user is not None and user.is_active:
         try:
@@ -88,10 +98,8 @@ def user_log_in(request):
             return JsonResponse({'login':True, 'username':username})
         except Exception as e:
             print(e)
-            return JsonResponse({'login':False})
-    print(request.data)
-    return JsonResponse({'login': False})
-    # return HttpResponse(response, 'static/index.html')
+            return JsonResponse({'login':False, 'reason':e})
+    return JsonResponse({'login': False, 'reason':'no_user'})
 
 @api_view(["GET"])
 def curr_user(request):
@@ -164,16 +172,16 @@ def favBeast(request):
     try:
         beast = Fav_Beast.objects.filter(name=beast_name, beast_id=beast_id)
         if beast.exists():
-            print(f"{beast_name} is already in favorites for {username}")
-            return JsonResponse({"fav request" : "already added"})
+            beast.delete()
+            return JsonResponse({"fave_beast" : "deleted"})
         else:
             new_beast = Fav_Beast.objects.create(name=beast_name, beast_id=beast_id, user=user)
             new_beast.save()
             print(f"{username} has saved {beast_name}")
-            return JsonResponse({"fav request" : "success"})
+            return JsonResponse({"fave_beast" : "saved"})
     except Exception as e:
         print(e)
-        return JsonResponse({"fav request" : "failed"})
+        return JsonResponse({"fave_beast" : "failed"})
     
 @api_view(["POST"])
 def getFaveBeasts(request):
@@ -209,7 +217,7 @@ def favItem(request):
             icon=item['icon'], trend=item['today']['trend'], price=item['current']['price'], trendprice=item['today']['price'], user=user)
             new_item.save()
             print(f"{item['name']} has been saved to {user}")
-            return JsonResponse({"fave_item" : "item added"})
+            return JsonResponse({"fave_item" : "added"})
     except Exception as e:
         print(e)
         return JsonResponse({"fave_item" : "failure"})
@@ -246,7 +254,8 @@ def getTimers(request):
     try:
         user = App_User.objects.get(email=request.data['user']['email'], username=request.data['user']['username'])
         timerList = list(Timer.objects.filter(user=user))
-        
+        if not timerList:
+            return JsonResponse({"timer_list" : "nothing_here"})
         for timer in timerList:
             data.append({
                 "name" : timer.name,
@@ -282,3 +291,17 @@ def saveTimer(request):
     except Exception as e:
         print(e)
         return JsonResponse({'saveTimer' : 'failed'})
+    
+@api_view(["POST"])
+def deleteTimer(request):
+    print(request.data)
+    timername = request.data['timer']
+
+    try:
+        user = App_User.objects.get(email=request.data['user']['email'], username=request.data['user']['username'])
+        timer = Timer.objects.get(name=timername, user=user)
+        timer.delete()
+        return JsonResponse({'timer_delete':'deleted'})
+    except Exception as e:
+        print(e)
+        return JsonResponse({'timer_delete' : 'failure'})

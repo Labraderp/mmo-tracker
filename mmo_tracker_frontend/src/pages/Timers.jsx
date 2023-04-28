@@ -18,7 +18,7 @@ export default function Timers() {
         'sec' : timerSec
     })
 
-    useEffect(async () => {
+    useEffect(() => {
         const timerDisplay = async () => {
             await getTimers(userData, setTimerList)
         }
@@ -36,22 +36,32 @@ export default function Timers() {
     }, [timerName, timerHours, timerMins, timerSec])
     
     return(
-        <>
         <div>
-            <form onSubmit={(e) => [e.preventDefault(), saveTimer(userData, timer)]}>
-                <input type="text" value={timerName} onChange={(e) => setTimerName(e.target.value)}/>
-                <input type="number" value={timerHours} onChange={(e) => setTimerHours(e.target.value)}/>
-                <input type="number" value={timerMins} onChange={(e) => setTimerMins(e.target.value)}/>
-                <input type="number" value={timerSec} onChange={(e) => setTimerSec(e.target.value)}/>
-                <button type="submit">Save Timer</button>
-            </form>
+            <div className="container-fluid">
+                <form onSubmit={(e) => [e.preventDefault(), saveTimer(userData, timer)]}>
+                <div className="row">
+                    <input className="form-floating p-2" placeholder="Timer Name" type="text" onChange={(e) => setTimerName(e.target.value)}/>
+                </div>
+                <div className="row-col-4 p-2">
+                        <input className="form-floating p-2" placeholder="Hours" type="number" onChange={(e) => setTimerHours(e.target.value)} min="0"/>
+
+                        <input className="form-floating p-2" placeholder="Minutes" type="number" onChange={(e) => setTimerMins(e.target.value)} min="0" max="59"/>
+
+                        <input className="form-floating p-2" placeholder="Seconds" type="number" onChange={(e) => setTimerSec(e.target.value)} min="0" max="59"/>
+
+                        <button className="btn btn-primary p-2" type="submit">Save Timer</button>
+
+                </div>
+                </form>
+            </div>
+            <div>
+                {(timerList == []) ?
+                    <div /> :
+                    <div>
+                    { timerList.map((timer) => <Timer name={timer.name} hours={timer.hours} mins={timer.mins} sec={timer.sec} />) }
+                    </div>
+                }
+            </div>
         </div>
-        <div>
-            {(timerList == []) ?
-                <div /> :
-                timerList.map((timer) => <Timer name={timer.name} hours={timer.hours} mins={timer.mins} sec={timer.sec} />)
-            }
-        </div>
-        </>
     )
 }

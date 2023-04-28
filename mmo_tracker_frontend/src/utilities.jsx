@@ -2,14 +2,44 @@ import axios from 'axios';
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 axios.defaults.xsrfCookieName = "csrftoken"
 
+const appendAlert = (message, type) => {
+    const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
+
+    const wrapper = document.createElement('div')
+    wrapper.innerHTML = [
+        `<div class="alert alert-${type} alert-dismissible fade show" role="alert">`,
+        `   <div class="fade show">${message}</div>`,
+        '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+        '</div>'
+    ].join('')
+
+    alertPlaceholder.append(wrapper)
+}
+
 export const signUp = async(username, email, password) => {
+    
     let response = await axios.post('/signup', {
         'username': username,
         'email': email,
         'password': password
     })
-    // console.log(response.data.success)
-    return response.data.success
+
+    console.log(response.data)
+
+    switch(response.data.signup) {
+        case false:
+            if(response.data.reason=='empty_field') {
+                appendAlert('Fields cannot be empty!', 'danger')
+                return response.data.success
+            }
+
+            appendAlert('User already registered, try logging in!', 'warning')
+            return response.data.success
+
+        case true:
+            appendAlert('You have signed up! Try logging in now :)', 'success')
+            return response.data.success
+    }
 }
 
 export const logIn = async(email, password, setUser) => {
@@ -17,11 +47,28 @@ export const logIn = async(email, password, setUser) => {
         'email':email,
         'password':password
     })
-    if(response.data.login) {
-        setUser(response.data.username)
-    }
-    // console.log(response.data)
-    return response
+
+    switch(response.data.login) {
+        case false:
+            if(response.data.reason=='no_email') {
+                appendAlert('No email given!', 'danger')
+                return response.data
+            }
+
+            if(response.data.reason=='no_password') {
+                appendAlert('No password given!', 'danger')
+                return response.data
+            }
+
+            if(response.data.reason == 'no_user') {
+                appendAlert('User does not exist, try signing up!', 'warning')
+                return response.data
+            }
+        case true:
+            appendAlert(`${response.data.username} has logged in - Welcome!`, 'success')
+            setUser(response.data.username)
+            return response.data
+    }    
 }
 
 export const currUser = async() => {
@@ -32,9 +79,16 @@ export const currUser = async() => {
 
 export const logOut = async(setUser) => {
     let response = await axios.post('/logout')
-    setUser(null)
-    // console.log(response)
-    return response.data.logout
+    
+    switch(response.data.logout) {
+        case(true):
+            appendAlert('Successfully logged out!', 'success')
+            setUser(null)
+            return response.data.logout
+        case(false):
+            appendAlert('There was an error logging out!', 'danger')
+            return response.data.logout
+    }
 }
 
 export const itemSearchOSRS = async(itemName, setItems, setMaxPages, setMaxFlag, pageNum, maxFlag) => {
@@ -70,6 +124,18 @@ export const saveBeast = async(beast, userData) => {
         "beast" : beast,
         "user" : userData
     })
+
+    switch(response.data.fave_beast) {
+        case('deleted'):
+            appendAlert(`${beast.label} was removed!`, 'warning')
+            break
+        case('saved'):
+            appendAlert(`${beast.label} added to favorites!`, 'success')
+            break
+        case('failed'):
+            appendAlert('There was an error...', 'danger')
+            break
+    }
     console.log(response)
 }
 
@@ -86,6 +152,18 @@ export const saveItem = async(item, userData) => {
         "user" : userData,
         "item" : item
     })
+
+    switch(response.data['fave_item']) {
+        case('removed'):
+            appendAlert(`${item.name} was removed!`, 'warning')
+            break
+        case('added'):
+            appendAlert(`${item.name} added to favorites!`, 'success')
+            break
+        case('failure'):
+            appendAlert('There was an error...', 'danger')
+            break
+    }
     console.log(response.data['fave_item'])
 }
 
@@ -101,7 +179,12 @@ export const getTimers = async(userData, setTimerList) => {
     let response = await axios.post('/getTimers', {
         "user" : userData
     })
-    setTimerList(response.data.timer_list)
+    if(response.data.timer_list == 'nothing_here') {
+        return response.data.timer_list
+    } else {
+        setTimerList(response.data.timer_list)
+    }
+    
 }
 
 export const saveTimer = async(userData, timer) => {
@@ -109,5 +192,34 @@ export const saveTimer = async(userData, timer) => {
         "user" : userData,
         "timer" : timer
     })
+    console.log(response.data)
+
+    switch(response.data.saveTimer) {
+        case('success'):
+            appendAlert('Timer created successfully!', 'success')
+            break
+        case('alreadyExists'):
+            appendAlert('Timer already exists!', 'warning')
+            break
+        case('failed'):
+            appendAlert('There was an error!', 'danger')
+    }
+}
+
+export const deleteTimer = async(userData, timer) => {
+    let response = await axios.post('/deleteTimer', {
+        "user" : userData,
+        "timer" : timer
+    })
+
+    switch(response.data.timer_delete) {
+        case('deleted'):
+            appendAlert('Timer deleted!', 'success')
+            break
+        case('failure'):
+            appendAlert('Timer already deleted!', 'failure')
+            break
+    }
+
     console.log(response.data)
 }
