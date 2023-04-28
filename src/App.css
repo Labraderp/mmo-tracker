@@ -1,0 +1,86 @@
+#root {
+  max-width: 2560px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  --main-text-color: wheat;
+  --main-bg-color: rgba(35, 35, 35, 70%);
+  --pos-bg-color: rgba(37, 128, 61, 70%);
+  --neg-bg-color: rgba(125, 54, 54, 70%);
+  --neu-bg-color: rgba(77, 77, 77, 70%);
+
+}
+
+#navIcon {
+  width: 75px;
+}
+
+body {
+  background-image: url("./assets/rsbg.jpg");
+  background-size: 100%;
+}
+
+#general-bg {
+  background-color: var(--main-bg-color);
+  color: var(--main-text-color);
+}
+
+#floatingEmail {
+  background-color: var(--main-bg-color);
+  color: var(--main-text-color);
+}
+
+#floatingUser {
+  background-color: var(--main-bg-color);
+  color: var(--main-text-color);
+}
+
+#floatingPass {
+  background-color: var(--main-bg-color);
+  color: var(--main-text-color);
+}
+
+#form-field {
+  background-color: var(--main-bg-color);
+  color: var(--main-text-color);
+}
+
+#card-text {
+  font-size: 1rem;
+  color: var(--main-text-color)
+}
+
+#item-icon {
+  width: 100px
+}
+
+#positive {
+  background-color: var(--pos-bg-color);
+}
+
+#negative {
+  background-color: var(--neg-bg-color);
+}
+
+#neutral {
+  background-color: var(--neu-bg-color);
+}
+
+h1 {
+  color: var(--main-text-color)
+
+}
+
+h2 {
+  color: var(--main-text-color)
+}
+h3 {
+  color: var(--main-text-color)
+}
+p {
+  color: var(--main-text-color)
+}
+
+#rsbuddyicon {
+  width: 100px
+}
