@@ -40,17 +40,16 @@ export default function Timers() {
             <div className="container-fluid">
                 <form onSubmit={(e) => [e.preventDefault(), saveTimer(userData, timer)]}>
                 <div className="row">
-                    <input className="form-floating p-2" placeholder="Timer Name" type="text" onChange={(e) => setTimerName(e.target.value)}/>
+                    <input className="form-floating p-2" id="form-field" placeholder="Timer Name" type="text" onChange={(e) => setTimerName(e.target.value)}/>
                 </div>
                 <div className="row-col-4 p-2">
-                        <input className="form-floating p-2" placeholder="Hours" type="number" onChange={(e) => setTimerHours(e.target.value)} min="0"/>
+                        <input className="form-floating p-2" id="form-field" placeholder="Hours" type="number" onChange={(e) => setTimerHours(e.target.value)} min="0"/>
 
-                        <input className="form-floating p-2" placeholder="Minutes" type="number" onChange={(e) => setTimerMins(e.target.value)} min="0" max="59"/>
+                        <input className="form-floating p-2" id="form-field" placeholder="Minutes" type="number" onChange={(e) => setTimerMins(e.target.value)} min="0" max="59"/>
 
-                        <input className="form-floating p-2" placeholder="Seconds" type="number" onChange={(e) => setTimerSec(e.target.value)} min="0" max="59"/>
+                        <input className="form-floating p-2" id="form-field" placeholder="Seconds" type="number" onChange={(e) => setTimerSec(e.target.value)} min="0" max="59"/>
 
                         <button className="btn btn-primary p-2" type="submit">Save Timer</button>
-
                 </div>
                 </form>
             </div>

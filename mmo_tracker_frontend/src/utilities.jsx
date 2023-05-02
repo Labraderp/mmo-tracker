@@ -198,8 +198,8 @@ export const saveTimer = async(userData, timer) => {
         case('success'):
             appendAlert('Timer created successfully!', 'success')
             break
-        case('alreadyExists'):
-            appendAlert('Timer already exists!', 'warning')
+        case('updated'):
+            appendAlert('Timer updated!', 'warning')
             break
         case('failed'):
             appendAlert('There was an error!', 'danger')

@@ -16,7 +16,7 @@ export default function BestiarySearch() {
             <h2>Search for a beast!</h2>
             <div className="container text-center">
             <form onSubmit={(e) => [e.preventDefault(), bestiarySearchOSRS(beastName, setBeastList)]}>
-                <input className="form-floating p-2" placeholder="Monster Name" onChange={(e) => {setBeastName(e.target.value)}} />
+                <input className="form-floating p-2" id="form-field" placeholder="Monster Name" onChange={(e) => {setBeastName(e.target.value)}} />
                 <button className="btn btn-primary p-2"type="submit">Search!</button>
             </form>
             </div>

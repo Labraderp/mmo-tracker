@@ -27,16 +27,22 @@ body {
 
 #floatingEmail {
   background-color: var(--main-bg-color);
+  color: var(--main-text-color);
 }
 
 #floatingUser {
   background-color: var(--main-bg-color);
-
+  color: var(--main-text-color);
 }
 
 #floatingPass {
   background-color: var(--main-bg-color);
+  color: var(--main-text-color);
+}
 
+#form-field {
+  background-color: var(--main-bg-color);
+  color: var(--main-text-color);
 }
 
 #card-text {

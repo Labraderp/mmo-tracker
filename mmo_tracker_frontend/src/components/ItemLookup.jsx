@@ -25,7 +25,7 @@ export default function ItemLookup() {
         <itemContext.Provider value={{items, setItems, setMaxPages, setMaxFlag, pageNum, maxFlag}}>
         <h2>Search for an item!</h2>
         <form onSubmit={(e) => [e.preventDefault(), setPageNum(1), itemSearchOSRS(itemName, setItems, setMaxPages, setMaxFlag, pageNum, maxFlag)]}>
-            <input className="form-floating p-2" placeholder="Item Name" onChange={(e) => {setItemName(e.target.value), setMaxFlag(0)}} />
+            <input className="form-floating p-2" id="form-field" placeholder="Item Name" onChange={(e) => {setItemName(e.target.value), setMaxFlag(0)}} />
             <button className="btn btn-primary p-2" type="submit">Search!</button>
         </form>
         </itemContext.Provider>
@@ -52,7 +52,7 @@ export default function ItemLookup() {
             <div /> :
             <div className="container text-center">
                 <div className="row row-cols-auto">
-                    { items.map((item) => <div className="col"><Item item={item}/></div>) }
+                    { items.map((item) =><div className="col"><Item item={item}/></div>)}
                 </div>
             </div>
 

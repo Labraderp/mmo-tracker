@@ -9,6 +9,7 @@ import gelogo from "../assets/gelogo.png"
 import jad from "../assets/jad.png"
 import astral from "../assets/astral.png"
 import watch from "../assets/watch.png"
+import { currUser } from "../utilities";
 
 
 

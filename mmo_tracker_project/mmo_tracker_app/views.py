@@ -186,6 +186,7 @@ def favBeast(request):
 @api_view(["POST"])
 def getFaveBeasts(request):
     data = []
+    print(request.data)
     email = request.data['user']['email']
     username = request.data['user']['username']
     user = App_User.objects.get(email=email, username=username)
@@ -208,7 +209,7 @@ def favItem(request):
     item = request.data['item']
 
     try:
-        new_item = Fav_Item.objects.filter(name=item['name'])
+        new_item = Fav_Item.objects.filter(name=item['name'], user=user)
         if new_item.exists():
             new_item.delete()
             return JsonResponse({"fave_item" : "removed"})
@@ -277,7 +278,12 @@ def saveTimer(request):
         user = App_User.objects.get(email=request.data['user']['email'], username=request.data['user']['username'])
         
         if(Timer.objects.filter(name=request.data['timer']['name'], user=user)):
-            return JsonResponse({'saveTimer': 'alreadyExists'})
+            timer = Timer.objects.filter(name=request.data['timer']['name'], user=user)
+            timer.update(
+                hours = request.data['timer']['hours'],
+                mins = request.data['timer']['mins'],
+                sec = request.data['timer']['sec'],)
+            return JsonResponse({'saveTimer': 'updated'})
         
         new_timer = Timer.objects.create(
             name = request.data['timer']['name'],
